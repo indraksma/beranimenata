@@ -22,6 +22,8 @@ class AdminDashboardTest extends TestCase
             'cita_cita' => 'Dokter',
             'target_pendidikan' => 'Kuliah kedokteran',
             'target_5_tahun' => 'Lulus SMA dan diterima di jurusan kedokteran.',
+            'pernah_mengalami_kendala' => 'Ya',
+            'cara_mengatasi_kendala' => 'Saya membuat jadwal belajar dan meminta arahan guru.',
             'keterampilan' => ['public speaking', 'bahasa Inggris'],
             'komitmen_berani' => 'Saya akan mencari informasi jurusan dan beasiswa minggu ini.',
         ]);
@@ -33,6 +35,8 @@ class AdminDashboardTest extends TestCase
             ->assertSee('Rani')
             ->assertSee('Dokter')
             ->assertSee('Kuliah kedokteran')
+            ->assertSee('Ya')
+            ->assertSee('Saya membuat jadwal belajar dan meminta arahan guru.')
             ->assertSee('public speaking, bahasa Inggris')
             ->assertSee('Saya akan mencari informasi jurusan dan beasiswa minggu ini.');
     }

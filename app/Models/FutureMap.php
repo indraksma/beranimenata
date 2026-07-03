@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Model;
     'cita_cita',
     'target_pendidikan',
     'target_5_tahun',
+    'pernah_mengalami_kendala',
+    'cara_mengatasi_kendala',
     'keterampilan',
     'komitmen_berani',
 ])]

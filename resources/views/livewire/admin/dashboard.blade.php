@@ -50,7 +50,7 @@
                 <span class="text-sm font-semibold text-slate-500">{{ count($futureMapRows) }} data</span>
             </div>
             <div class="mt-4 overflow-x-auto">
-                <table class="w-full min-w-[76rem] text-left text-sm">
+                <table class="w-full min-w-[58rem] text-left text-sm">
                     <thead class="border-b border-slate-200 text-slate-500">
                         <tr>
                             <th class="py-3 pr-4 font-semibold">Waktu input</th>
@@ -59,9 +59,8 @@
                             <th class="py-3 pr-4 font-semibold">Pendidikan</th>
                             <th class="py-3 pr-4 font-semibold">Cita-cita</th>
                             <th class="py-3 pr-4 font-semibold">Target pendidikan</th>
-                            <th class="py-3 pr-4 font-semibold">Target 5 tahun</th>
-                            <th class="py-3 pr-4 font-semibold">Keterampilan</th>
-                            <th class="py-3 pr-4 font-semibold">Komitmen</th>
+                            <th class="py-3 pr-4 font-semibold">Kendala</th>
+                            <th class="py-3 pr-4 font-semibold">Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100 align-top">
@@ -73,13 +72,61 @@
                                 <td class="py-3 pr-4 text-slate-600">{{ $row['pendidikan_saat_ini'] }}</td>
                                 <td class="py-3 pr-4 font-semibold text-slate-800">{{ $row['cita_cita'] }}</td>
                                 <td class="py-3 pr-4 text-slate-600">{{ $row['target_pendidikan'] }}</td>
-                                <td class="py-3 pr-4 min-w-64 text-slate-600">{{ $row['target_5_tahun'] }}</td>
-                                <td class="py-3 pr-4 min-w-56 text-slate-600">{{ $row['keterampilan'] }}</td>
-                                <td class="py-3 pr-4 min-w-72 text-slate-600">{{ $row['komitmen_berani'] }}</td>
+                                <td class="py-3 pr-4 text-slate-600">{{ $row['pernah_mengalami_kendala'] }}</td>
+                                <td class="py-3 pr-4">
+                                    <button class="btn-secondary px-3 py-2 text-xs" type="button" onclick="document.getElementById('future-map-detail-{{ $row['id'] }}').showModal()">Detail</button>
+                                    <dialog id="future-map-detail-{{ $row['id'] }}" class="w-[min(44rem,calc(100vw-2rem))] rounded-lg border border-slate-200 bg-white p-0 shadow-2xl backdrop:bg-slate-950/50">
+                                        <div class="border-b border-slate-200 p-5">
+                                            <div class="flex items-start justify-between gap-4">
+                                                <div>
+                                                    <p class="text-sm font-semibold text-teal-700">{{ $row['submitted_at'] }}</p>
+                                                    <h3 class="mt-1 text-xl font-black text-slate-950">Detail {{ $row['nama_panggilan'] }}</h3>
+                                                </div>
+                                                <form method="dialog">
+                                                    <button class="btn-secondary px-3 py-2 text-xs" type="submit">Tutup</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="max-h-[72vh] space-y-4 overflow-y-auto p-5 text-sm">
+                                            <div>
+                                                <span class="block font-semibold text-slate-500">Data diri</span>
+                                                <p class="mt-1 font-semibold text-slate-900">{{ $row['nama_panggilan'] }}, {{ $row['usia'] }} tahun, {{ $row['pendidikan_saat_ini'] }}</p>
+                                            </div>
+                                            <div>
+                                                <span class="block font-semibold text-slate-500">Cita-cita</span>
+                                                <p class="mt-1 text-slate-800">{{ $row['cita_cita'] }}</p>
+                                            </div>
+                                            <div>
+                                                <span class="block font-semibold text-slate-500">Target pendidikan</span>
+                                                <p class="mt-1 text-slate-800">{{ $row['target_pendidikan'] }}</p>
+                                            </div>
+                                            <div>
+                                                <span class="block font-semibold text-slate-500">Target 5 tahun</span>
+                                                <p class="mt-1 whitespace-pre-line text-slate-800">{{ $row['target_5_tahun'] }}</p>
+                                            </div>
+                                            <div>
+                                                <span class="block font-semibold text-slate-500">Pernah mengalami kendala</span>
+                                                <p class="mt-1 text-slate-800">{{ $row['pernah_mengalami_kendala'] }}</p>
+                                            </div>
+                                            <div>
+                                                <span class="block font-semibold text-slate-500">Cara mengatasi kendala</span>
+                                                <p class="mt-1 whitespace-pre-line text-slate-800">{{ $row['cara_mengatasi_kendala'] }}</p>
+                                            </div>
+                                            <div>
+                                                <span class="block font-semibold text-slate-500">Keterampilan</span>
+                                                <p class="mt-1 text-slate-800">{{ $row['keterampilan'] }}</p>
+                                            </div>
+                                            <div>
+                                                <span class="block font-semibold text-slate-500">Komitmen BERANI</span>
+                                                <p class="mt-1 whitespace-pre-line text-slate-800">{{ $row['komitmen_berani'] }}</p>
+                                            </div>
+                                        </div>
+                                    </dialog>
+                                </td>
                             </tr>
                         @empty
                             <tr>
-                                <td class="py-6 text-slate-500" colspan="9">Belum ada data peta masa depan.</td>
+                                <td class="py-6 text-slate-500" colspan="8">Belum ada data peta masa depan.</td>
                             </tr>
                         @endforelse
                     </tbody>

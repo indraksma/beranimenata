@@ -59,6 +59,22 @@
                                     <textarea class="form-input min-h-32" wire:model="target_5_tahun" wire:key="field-target-5-tahun" placeholder="Tuliskan target yang ingin kamu capai."></textarea>
                                     @error('target_5_tahun') <span class="form-error">{{ $message }}</span> @enderror
                                 </label>
+                                <label class="block">
+                                    <span class="form-label">Apakah kamu pernah mengalami kendala dalam mencapai cita-citamu?</span>
+                                    <select class="form-input" wire:model.live="pernah_mengalami_kendala" wire:key="field-pernah-mengalami-kendala">
+                                        <option value="">Pilih jawaban</option>
+                                        <option value="Ya">Ya</option>
+                                        <option value="Tidak">Tidak</option>
+                                    </select>
+                                    @error('pernah_mengalami_kendala') <span class="form-error">{{ $message }}</span> @enderror
+                                </label>
+                                @if ($pernah_mengalami_kendala === 'Ya')
+                                    <label class="block">
+                                        <span class="form-label">Kalau iya, apakah kendala tersebut sudah berhasil kamu atasi? Jika sudah, bagaimana cara kamu mengatasinya?</span>
+                                        <textarea class="form-input min-h-32" wire:model="cara_mengatasi_kendala" wire:key="field-cara-mengatasi-kendala" placeholder="Contoh: Saya berdiskusi dengan guru BK dan membuat jadwal belajar yang lebih teratur."></textarea>
+                                        @error('cara_mengatasi_kendala') <span class="form-error">{{ $message }}</span> @enderror
+                                    </label>
+                                @endif
                             </div>
                         @elseif ($step === 3)
                             <label class="block" wire:key="future-map-step-3">
@@ -127,6 +143,10 @@
                         <div class="summary-row"><span>Cita-cita</span><strong>{{ $futureMap->cita_cita }}</strong></div>
                         <div class="summary-row"><span>Target pendidikan</span><strong>{{ $futureMap->target_pendidikan }}</strong></div>
                         <div class="summary-row"><span>Target 5 tahun</span><strong>{{ $futureMap->target_5_tahun }}</strong></div>
+                        <div class="summary-row"><span>Pernah mengalami kendala</span><strong>{{ $futureMap->pernah_mengalami_kendala }}</strong></div>
+                        @if ($futureMap->cara_mengatasi_kendala)
+                            <div class="summary-row"><span>Cara mengatasi kendala</span><strong>{{ $futureMap->cara_mengatasi_kendala }}</strong></div>
+                        @endif
                         <div class="summary-row"><span>Keterampilan</span><strong>{{ implode(', ', $futureMap->keterampilan ?? []) }}</strong></div>
                         <div class="rounded-lg bg-teal-50 p-5">
                             <span class="text-sm font-semibold text-teal-700">Komitmen BERANI</span>

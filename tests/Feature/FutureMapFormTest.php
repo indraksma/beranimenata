@@ -22,6 +22,8 @@ class FutureMapFormTest extends TestCase
             ->set('cita_cita', 'Dokter')
             ->set('target_pendidikan', 'Kuliah kedokteran')
             ->set('target_5_tahun', 'Lulus SMA dan diterima di jurusan kedokteran.')
+            ->set('pernah_mengalami_kendala', 'Ya')
+            ->set('cara_mengatasi_kendala', 'Saya membuat jadwal belajar dan meminta arahan guru.')
             ->call('nextStep')
             ->assertSet('step', 3)
             ->set('keterampilan', 'public speaking, bahasa Inggris')
@@ -38,6 +40,8 @@ class FutureMapFormTest extends TestCase
             'pendidikan_saat_ini' => 'SMA',
             'cita_cita' => 'Dokter',
             'target_pendidikan' => 'Kuliah kedokteran',
+            'pernah_mengalami_kendala' => 'Ya',
+            'cara_mengatasi_kendala' => 'Saya membuat jadwal belajar dan meminta arahan guru.',
         ]);
     }
 }

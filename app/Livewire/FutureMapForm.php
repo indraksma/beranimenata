@@ -26,6 +26,10 @@ class FutureMapForm extends Component
 
     public string $target_5_tahun = '';
 
+    public string $pernah_mengalami_kendala = '';
+
+    public string $cara_mengatasi_kendala = '';
+
     public string $keterampilan = '';
 
     public string $komitmen_berani = '';
@@ -47,6 +51,14 @@ class FutureMapForm extends Component
             'cita_cita' => ['required', 'string', 'max:120'],
             'target_pendidikan' => ['required', 'string', 'max:160'],
             'target_5_tahun' => ['required', 'string', 'min:15', 'max:1000'],
+            'pernah_mengalami_kendala' => ['required', Rule::in(['Ya', 'Tidak'])],
+            'cara_mengatasi_kendala' => [
+                'nullable',
+                'required_if:pernah_mengalami_kendala,Ya',
+                'string',
+                'min:10',
+                'max:1000',
+            ],
             'keterampilan' => ['required', 'string', 'min:3', 'max:800'],
             'komitmen_berani' => ['required', 'string', 'min:10', 'max:1000'],
             'setuju_komitmen' => ['accepted'],
@@ -75,6 +87,10 @@ class FutureMapForm extends Component
             'cita_cita' => $this->cita_cita,
             'target_pendidikan' => $this->target_pendidikan,
             'target_5_tahun' => $this->target_5_tahun,
+            'pernah_mengalami_kendala' => $this->pernah_mengalami_kendala,
+            'cara_mengatasi_kendala' => $this->pernah_mengalami_kendala === 'Ya'
+                ? ($this->cara_mengatasi_kendala ?: null)
+                : null,
             'keterampilan' => $this->skillsAsArray(),
             'komitmen_berani' => $this->komitmen_berani,
         ]);
@@ -95,6 +111,8 @@ class FutureMapForm extends Component
                 'cita_cita' => $this->rules()['cita_cita'],
                 'target_pendidikan' => $this->rules()['target_pendidikan'],
                 'target_5_tahun' => $this->rules()['target_5_tahun'],
+                'pernah_mengalami_kendala' => $this->rules()['pernah_mengalami_kendala'],
+                'cara_mengatasi_kendala' => $this->rules()['cara_mengatasi_kendala'],
             ],
             3 => ['keterampilan' => $this->rules()['keterampilan']],
             default => [

@@ -18,7 +18,7 @@ class Dashboard extends Component
     /** @var array<int, array{date: string, total: int}> */
     public array $submissionTrend = [];
 
-    /** @var array<int, array{id: int, submitted_at: string, nama_panggilan: string, usia: int, pendidikan_saat_ini: string, cita_cita: string, target_pendidikan: string, target_5_tahun: string, keterampilan: string, komitmen_berani: string}> */
+    /** @var array<int, array{id: int, submitted_at: string, nama_panggilan: string, usia: int, pendidikan_saat_ini: string, cita_cita: string, target_pendidikan: string, target_5_tahun: string, pernah_mengalami_kendala: string, cara_mengatasi_kendala: string, keterampilan: string, komitmen_berani: string}> */
     public array $futureMapRows = [];
 
     public function mount(): void
@@ -59,6 +59,8 @@ class Dashboard extends Component
                 'cita_cita' => $map->cita_cita,
                 'target_pendidikan' => $map->target_pendidikan,
                 'target_5_tahun' => $map->target_5_tahun,
+                'pernah_mengalami_kendala' => $map->pernah_mengalami_kendala,
+                'cara_mengatasi_kendala' => $map->cara_mengatasi_kendala ?: '-',
                 'keterampilan' => implode(', ', $map->keterampilan ?? []),
                 'komitmen_berani' => $map->komitmen_berani,
             ])
